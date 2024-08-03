@@ -38,3 +38,4 @@ function changeVolumePrecise(toIncrease: boolean) {
 export function onUnload() {
     audioElement?.removeEventListener('wheel', onWheel);
 }
+export { Settings } from './settings';
