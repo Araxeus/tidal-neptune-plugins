@@ -9,5 +9,5 @@ export const settings = getSettings({
 export const Settings = () => html`<div>
 	<${SwitchSetting} checked=${settings.precise} onClick=${() => {
         settings.precise = !settings.precise;
-    }} title="Always use Tidal Fullscreen mode" />
+    }} title="Precise volume adjustments" />
 </div>`;
