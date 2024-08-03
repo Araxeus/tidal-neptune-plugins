@@ -6,9 +6,7 @@
   "files": {
     "ignore": [
       "./node_modules/**",
-      "./vendor/**",
-      "./package.json",
-      "./dist/**"
+      "./release/**"
     ]
   },
   "javascript": {

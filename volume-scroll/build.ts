@@ -4,7 +4,7 @@ import plugin from './package.json';
 
 const nativeExternals = ['@neptune', '@plugin', 'electron'];
 
-const destination = './dist';
+const destination = './release';
 
 await rmdir(destination, { recursive: true });
 
@@ -29,6 +29,7 @@ await Bun.write(
         name: plugin.name,
         description: plugin.description,
         author: plugin.author,
+        version: plugin.version,
         hash: await getMD5Hash(res.outputs[0].path),
     }),
 );

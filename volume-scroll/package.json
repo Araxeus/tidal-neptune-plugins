@@ -2,6 +2,7 @@
   "name": "volume-scroll",
   "description": "Enable mousewheel volume control",
   "author": "Araxeus",
+  "version": "0.1.0",
   "module": "volume-scroll.js",
   "type": "module",
   "devDependencies": {

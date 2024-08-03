@@ -1,0 +1,1 @@
+import{actions as j}from"@neptune";function q(b){if(b.preventDefault(),b.deltaY>0)j.playbackControls.increaseVolume();else j.playbackControls.decreaseVolume()}function w(){k?.removeEventListener("wheel",q)}var k=document.querySelector('#footerPlayer>[class^="moreContainer"]>[class^="sliderContainer"]');k?.addEventListener("wheel",q);export{w as onUnload};
