@@ -1,13 +1,13 @@
 import { html } from '@neptune/voby';
-import { getSettings } from '../lib/storage';
 import { SwitchSetting } from '../lib/components/switch-settings';
+import { getSettings } from '../lib/storage';
 
 export const settings = getSettings({
-    useTidalFullscreen: false as boolean,
+    precise: false as boolean,
 });
 
 export const Settings = () => html`<div>
-	<${SwitchSetting} checked=${settings.useTidalFullscreen} onClick=${() => {
-        settings.useTidalFullscreen = !settings.useTidalFullscreen;
+	<${SwitchSetting} checked=${settings.precise} onClick=${() => {
+        settings.precise = !settings.precise;
     }} title="Always use Tidal Fullscreen mode" />
 </div>`;
