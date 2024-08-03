@@ -15,3 +15,6 @@ Enable scrolling the mousewheel to change the playback volume
 
 - **[Inrixia/neptune-plugins](https://github.com/Inrixia/neptune-plugins)**
 - **[twnlink/neptune-plugins](https://github.com/twnlink/neptune-plugins)**
+
+> [!NOTE]  
+> Near future update will add settings that allows changing the volume "steps" (using `actions.playbackControls.setVolume()`)
