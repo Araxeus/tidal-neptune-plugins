@@ -4,10 +4,7 @@
     "enabled": true
   },
   "files": {
-    "ignore": [
-      "./node_modules/**",
-      "./release/**"
-    ]
+    "ignore": ["./node_modules/**", "./release/**"]
   },
   "javascript": {
     "formatter": {
