@@ -10,9 +10,9 @@ const audioElement = document.querySelector<HTMLElement>(
 function onWheel(e: WheelEvent) {
     e.preventDefault();
     if (e.deltaY > 0) {
-        actions.playbackControls.increaseVolume();
-    } else {
         actions.playbackControls.decreaseVolume();
+    } else {
+        actions.playbackControls.increaseVolume();
     }
 }
 
