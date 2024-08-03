@@ -1,0 +1,19 @@
+{
+  "name": "volume-scroll",
+  "description": "Enable mousewheel volume control",
+  "author": "Araxeus",
+  "module": "volume-scroll.js",
+  "type": "module",
+  "devDependencies": {
+    "@biomejs/biome": "^1.8.3",
+    "@types/bun": "^1.1.6",
+    "neptune-types": "^1.0.1",
+    "typescript": "^5.5.4"
+  },
+  "scripts": {
+    "b": "bun build.ts"
+  },
+  "trustedDependencies": [
+    "@biomejs/biome"
+  ]
+}
