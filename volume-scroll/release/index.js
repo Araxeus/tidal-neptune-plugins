@@ -7,5 +7,5 @@ import{actions as s,store as $}from"@neptune";import{html as b}from"@neptune/vob
 			<span onClick=${o} class="neptune-switch" />
 		<//>
 	`};import{storage as r}from"@plugin";var y=(t)=>{r.settings??={};for(let o of Object.keys(t))r.settings[o]??=t[o];return r.settings};var p=y({precise:!1}),k=()=>b`<div>
-	<${n} checked=${p.precise} onClick=${()=>{p.precise=!p.precise}} title="Always use Tidal Fullscreen mode" />
+	<${n} checked=${p.precise} onClick=${()=>{p.precise=!p.precise}} title="Precise volume adjustments" />
 </div>`;function T(t){if(!t.deltaY)return;t.preventDefault();const o=t.deltaY<0;if(p.precise)l(o);else h(o)}function h(t){t?s.playbackControls.increaseVolume():s.playbackControls.decreaseVolume()}function l(t){const o=$.getState().playbackControls.volume,i=Math.round(t?Math.min(o+1,100):Math.max(o-1,0));s.playbackControls.setVolume({volume:i})}function R(){S?.removeEventListener("wheel",T)}var S=document.querySelector('#footerPlayer>[class^="moreContainer"]>[class^="sliderContainer"]');S?.addEventListener("wheel",T);export{R as onUnload,k as Settings};
