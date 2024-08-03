@@ -27,7 +27,7 @@ await Bun.write(
     `${destination}/manifest.json`,
     JSON.stringify({
         name: plugin.name,
-        description: plugin.description,
+        description: `${plugin.description} (v${plugin.version})`,
         author: plugin.author,
         version: plugin.version,
         hash: await getMD5Hash(res.outputs[0].path),

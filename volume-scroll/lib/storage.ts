@@ -11,6 +11,7 @@ export const getStorage = <T extends Storage>(defaultValue: T): T => {
 export const getSettings = <T extends StorageSettings>(defaultValue: T): T => {
     storage.settings ??= {};
     for (const key of Object.keys(defaultValue)) {
+        // @ts-expect-error
         storage.settings[key] ??= defaultValue[key];
     }
     return <T>storage.settings;
