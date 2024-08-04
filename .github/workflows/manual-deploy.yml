@@ -1,4 +1,4 @@
-name: Run Bun Command
+name: Manual Deploy
 
 on:
   workflow_dispatch:

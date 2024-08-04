@@ -1,5 +1,5 @@
 # https://github.com/dependabot/dependabot-core/issues/6528#issuecomment-2013695799
-name: 'Dependabot: Update bun.lockb'
+name: 'Dependabot: patch bun.lockb'
 on:
   pull_request:
     paths:
