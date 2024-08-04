@@ -23,6 +23,29 @@ Enable scrolling the mousewheel on the player to change the playback volume and 
 
 If you have a plugin you'd like to add to this list, or you want to add features/fix bugs - feel free to open a pull request.
 
+To create a new plugin, create a new folder in [`/plugins`](/plugins) with the name of your plugin. Inside that folder, create a `src` folder with your plugin's source code. The entry point should be `index.ts`.
+
+the plugin folder should also contain a `plugin.json` file with the following structure:
+
+```json
+{
+  "name": "Plugin Name",
+  "description": "A short description of what the plugin does",
+  "author": "Your Name", // optional
+  "version": "0.0.1",
+}
+```
+
+your entry point can export the following:
+
+- `onUnload()`: Function called when the plugin is unloaded
+
+- `Settings`: A voby Element that will be rendered in the settings page.
+
+### Development
+
+This repository uses [Bun](https://bun.sh) as a package manager and build tool.
+
 To install dependencies:
 
 ```bash
@@ -34,3 +57,5 @@ To build:
 ```bash
 bun b
 ```
+
+The whole build process is explained in [scripts/build.ts](/scripts/build.ts).

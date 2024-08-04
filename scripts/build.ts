@@ -1,11 +1,9 @@
 import { readdir, rmdir } from 'node:fs/promises';
 import { join as j, resolve as resolvePath } from 'node:path';
 
-import packageJson from '../package.json';
-
 import prettyMs from 'pretty-ms';
 
-const nativeExternals = ['@neptune', '@plugin', 'electron'];
+import packageJson from '../package.json';
 
 const plugins = (await readdir('./plugins', { withFileTypes: true })).flatMap(
     (dirent) => (dirent.isDirectory() ? dirent.name : []),
@@ -15,17 +13,17 @@ for (const pluginName of plugins) {
     const timeNow = performance.now();
     const dir = resolvePath(import.meta.dir, '..', 'plugins', pluginName);
     const destFolder = j(dir, 'release');
+
     await rmdir(destFolder, { recursive: true });
+
     const res = await Bun.build({
         entrypoints: [j(dir, 'src', 'index.ts')],
         outdir: destFolder,
         target: 'browser',
         minify: true,
-        external: nativeExternals,
+        external: ['@neptune', '@plugin', 'electron'],
         //packages: "external",
     });
-
-    //console.log(res); // DELETE
 
     if (!res.outputs?.length) {
         console.error(`Error building ${pluginName}`);

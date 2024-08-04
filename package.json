@@ -6,14 +6,15 @@
     "@types/bun": "^1.1.6",
     "neptune-types": "^1.0.1",
     "pretty-ms": "^9.1.0",
-    "ts-morph": "^23.0.0",
     "typescript": "^5.5.4"
   },
   "scripts": {
     "b": "bun scripts/build.ts",
     "check": "bun biome check",
-    "lint": "bun biome check --write",
-    "morph": "bun scripts/morph.ts"
+    "lint": "bun biome check --write"
   },
-  "trustedDependencies": ["@biomejs/biome"]
+  "trustedDependencies": ["@biomejs/biome"],
+  "engines": {
+    "bun": ">>=1.1.21"
+  }
 }
