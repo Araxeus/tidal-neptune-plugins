@@ -15,27 +15,20 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 2 # We need at least two commits to compare
+      - uses: oven-sh/setup-bun@v2
 
       - name: Check for added or deleted files directly under plugins directory
         id: check-plugin-changes
-        run: |
-          if git diff --name-status HEAD^ HEAD | grep -E '^[AD]\tplugins/[^/]+$' > /dev/null; then
-            echo "plugin_changes=true" >> $GITHUB_OUTPUT
-          else
-            echo "plugin_changes=false" >> $GITHUB_OUTPUT
-          fi
+        run: echo "plugin_changes=$(bun scripts/check-if-plugins-changed.ts)" >> $GITHUB_OUTPUT
 
       - name: Exit if no plugins were added or deleted
         # exit if no plugins were added or deleted
         if: steps.check-plugin-changes.outputs.plugin_changes == 'false'
         run: exit 0
 
-      - uses: oven-sh/setup-bun@v2
-
       - run: bun install
 
-      - name: Run action if plugins were added or deleted
-        run: bun scripts/update-actions.ts
+      - run: bun scripts/update-actions.ts
 
       - name: Commit Changes
         run: |
