@@ -1,6 +1,6 @@
-# My [Tidal Neptune Client](https://github.com/uwu/neptune-installer/releases/latest) Plugins
+# My [Tidal Neptune Client](https://neptune.uwu.network/) Plugins
 
-To install any of these plugins you need to have the [Tidal Neptune Client](https://github.com/uwu/neptune-installer/releases/latest) installed.
+To install any of these plugins you need to have the [Tidal Neptune Client](https://neptune.uwu.network/) installed.
 
 Then just paste the **Install Url** into the plugins page and hit enter.
 ![image](https://github.com/Inrixia/neptune-plugins/assets/6373693/a997156c-a281-46ec-992a-397a742dd146)
