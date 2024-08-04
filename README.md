@@ -15,3 +15,20 @@ Enable scrolling the mousewheel on the player to change the playback volume and 
 
 - **[Inrixia/neptune-plugins](https://github.com/Inrixia/neptune-plugins)**
 - **[twnlink/neptune-plugins](https://github.com/twnlink/neptune-plugins)**
+
+----
+
+## Contributing
+If you have a plugin you'd like to add to this list, or you want to add features/fix bugs - feel free to open a pull request.
+
+To install dependencies:
+
+```bash
+bun install
+```
+
+To build:
+
+```bash
+bun b
+```

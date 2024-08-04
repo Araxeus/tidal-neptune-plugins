@@ -1,7 +1,11 @@
 {
   // https://github.com/uwu/neptune/blob/master/types/tsconfig.base.json
   "extends": "neptune-types/tsconfig.base.json",
+  "exclude": ["plugins/*/release/*"],
   "compilerOptions": {
+    "paths": {
+      "lib/*": ["./lib/*"],
+    },
     "checkJs": true
   }
 }

@@ -1,14 +1,12 @@
 {
-  "name": "Volume Scroll",
-  "description": "Enable mousewheel volume control",
   "author": "Araxeus",
-  "version": "0.3.3",
-  "module": "volume-scroll.js",
   "type": "module",
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
     "@types/bun": "^1.1.6",
     "neptune-types": "^1.0.1",
+    "pretty-ms": "^9.1.0",
+    "ts-morph": "^23.0.0",
     "typescript": "^5.5.4"
   },
   "scripts": {
