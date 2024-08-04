@@ -23,15 +23,19 @@ if (!res.outputs?.length) {
     console.error('Not generating manifest because no outputs were generated');
 }
 
+const manifestData = JSON.stringify({
+    name: plugin.name,
+    description: `${plugin.description} (v${plugin.version})`,
+    author: plugin.author,
+    version: plugin.version,
+    hash: await getMD5Hash(res.outputs[0].path),
+});
+
+await Bun.write(`${destination}/manifest.json`, manifestData);
+
 await Bun.write(
-    `${destination}/manifest.json`,
-    JSON.stringify({
-        name: plugin.name,
-        description: `${plugin.description} (v${plugin.version})`,
-        author: plugin.author,
-        version: plugin.version,
-        hash: await getMD5Hash(res.outputs[0].path),
-    }),
+    `${destination}/standalone.js`,
+    `/* ${manifestData} */\n${await res.outputs[0].text()}`,
 );
 
 async function getMD5Hash(filepath: string): Promise<string> {

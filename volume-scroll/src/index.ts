@@ -1,11 +1,13 @@
 import { actions, store } from '@neptune';
 import { settings } from './settings';
 
-const audioElement = document.querySelector<HTMLElement>(
+const footerPlayer = document.querySelector<HTMLElement>('#footerPlayer');
+const audioElement = footerPlayer?.querySelector<HTMLElement>(
     '#footerPlayer>[class^="moreContainer"]>[class^="sliderContainer"]',
 );
+const onWheelElement = footerPlayer;
 
-audioElement?.addEventListener('wheel', onWheel);
+onWheelElement?.addEventListener('wheel', onWheel);
 
 // Event.deltaY < 0 means wheel-up (increase), > 0 means wheel-down (decrease)
 function onWheel(e: WheelEvent) {
@@ -17,6 +19,7 @@ function onWheel(e: WheelEvent) {
     } else {
         changeVolumePrecise(toIncrease);
     }
+    showVolume();
 }
 
 function changeVolumeBy10(toIncrease: boolean) {
@@ -35,7 +38,14 @@ function changeVolumePrecise(toIncrease: boolean) {
     actions.playbackControls.setVolume({ volume });
 }
 
+function showVolume() {
+    audioElement?.dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
+    setTimeout(() => {
+        audioElement?.dispatchEvent(new MouseEvent('mouseout', { bubbles: true }));
+    }, 500);
+}
+
 export function onUnload() {
-    audioElement?.removeEventListener('wheel', onWheel);
+    onWheelElement?.removeEventListener('wheel', onWheel);
 }
 export { Settings } from './settings';
