@@ -2,19 +2,15 @@ import { rmdir } from 'node:fs/promises';
 import { join as j, resolve as resolvePath } from 'node:path';
 import { getPlugins } from 'lib/common';
 import prettyMs from 'pretty-ms';
-
 import packageJson from '../package.json';
-
-const plugins = await getPlugins();
 
 const args = process.argv.slice(2);
 const onlySelected = args.includes('--only');
 const selectedPlugins =
     onlySelected && args.filter((arg) => !arg.startsWith('--'));
 
-for (const pluginName of plugins) {
+for (const pluginName of await getPlugins()) {
     if (onlySelected && !(selectedPlugins as string[]).includes(pluginName)) {
-        console.log(`Skipping ${pluginName}`);
         continue;
     }
     const timeNow = performance.now();
@@ -52,12 +48,13 @@ for (const pluginName of plugins) {
         hash: await getMD5Hash(res.outputs[0].path),
     });
 
-    await Bun.write(j(destFolder, 'manifest.json'), manifestData);
-
-    await Bun.write(
-        j(destFolder, 'standalone.js'),
-        `/* ${manifestData} */\n${await res.outputs[0].text()}`,
-    );
+    await Promise.all([
+        Bun.write(
+            j(destFolder, 'standalone.js'),
+            `/* ${manifestData} */\n${await res.outputs[0].text()}`,
+        ),
+        Bun.write(j(destFolder, 'manifest.json'), manifestData),
+    ]);
 
     console.log(
         `Built plugin ${pluginName} in ${prettyMs(performance.now() - timeNow)}`,
@@ -69,8 +66,4 @@ async function getMD5Hash(filepath: string): Promise<string> {
     const hasher = new Bun.CryptoHasher('md5');
     hasher.update(await file.arrayBuffer());
     return hasher.digest('hex');
-}
-
-interface Globalthis {
-    Bun: typeof import('bun');
 }

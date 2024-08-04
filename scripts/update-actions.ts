@@ -6,7 +6,6 @@ import {
     isNode,
     parseDocument,
 } from 'yaml';
-const plugins = await getPlugins();
 
 const actionPath = resolvePath(
     import.meta.dir,
@@ -16,7 +15,10 @@ const actionPath = resolvePath(
     'manual-deploy.yml',
 );
 
-const file = await Bun.file(actionPath).text();
+const [plugins, file] = await Promise.all([
+    getPlugins(),
+    Bun.file(actionPath).text(),
+]);
 
 const action = parseDocument(file);
 
