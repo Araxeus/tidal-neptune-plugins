@@ -61,8 +61,8 @@ function setup() {
 }
 
 const unloadIntercept = intercept(
-    'page/IS_DONE_LOADING',
-    () => void setTimeout(setup, 1000),
+    'playbackControls/SET_VOLUME',
+    setup,
     true,
 );
 setup();

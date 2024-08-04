@@ -1,6 +1,6 @@
 import { rmdir } from 'node:fs/promises';
 import Bun from 'bun';
-import plugin from './package.json';
+import plugin from '../package.json';
 
 const nativeExternals = ['@neptune', '@plugin', 'electron'];
 
