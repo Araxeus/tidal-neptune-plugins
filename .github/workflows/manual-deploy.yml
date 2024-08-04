@@ -14,11 +14,6 @@ jobs:
   run-bun-command:
     runs-on: ubuntu-latest
     steps:
-      - uses: cycodelabs/cimon-action@v0
-        with:
-          prevent: true
-          allowed-hosts: >
-            api.cycode.com github.com api.github.com codeload.github.com objects.githubusercontent.com registry.npmjs.org bun.sh
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
 

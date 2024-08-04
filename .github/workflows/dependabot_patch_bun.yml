@@ -12,7 +12,6 @@ jobs:
     if: github.actor == 'dependabot[bot]'
     runs-on: ubuntu-latest
     steps:
-      - uses: cycodelabs/cimon-action@v0
       - uses: oven-sh/setup-bun@v2
       - uses: actions/checkout@v4
         with:
