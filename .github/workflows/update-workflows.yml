@@ -1,0 +1,48 @@
+name: Update Workflows
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'plugins/*'
+
+jobs:
+  check-plugin-changes:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # We need at least two commits to compare
+
+      - name: Check for added or deleted files directly under plugins directory
+        id: check-plugin-changes
+        run: |
+          if git diff --name-status HEAD^ HEAD | grep -E '^[AD]\tplugins/[^/]+$' > /dev/null; then
+            echo "plugin_changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "plugin_changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Exit if no plugins were added or deleted
+        # exit if no plugins were added or deleted
+        if: steps.check-plugin-changes.outputs.plugin_changes == 'false'
+        run: exit 0
+
+      - uses: oven-sh/setup-bun@v2
+
+      - run: bun install
+
+      - name: Run action if plugins were added or deleted
+        run: bun scripts/update-actions.ts
+
+      - name: Commit Changes
+        run: |
+          git config --global user.name "Workflow Updater"
+          git config --global user.email "actions@users.noreply.github.com"
+          git add -A
+          timestamp=$(date -u)
+          git commit -m "Automated Workflow Update" || exit 0
+          git push
+

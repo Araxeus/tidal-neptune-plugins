@@ -1,0 +1,40 @@
+name: Run Bun Command
+
+on:
+  workflow_dispatch:
+    inputs:
+      testing:
+        type: boolean
+        default: false
+      volume-scroll:
+        type: boolean
+        default: false
+
+jobs:
+  run-bun-command:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: cycodelabs/cimon-action@v0
+        with:
+          prevent: true
+          allowed-hosts: >
+            api.cycode.com github.com api.github.com codeload.github.com objects.githubusercontent.com registry.npmjs.org bun.sh
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+
+      - run: bun install && bun ci
+
+      - id: get-selected-step
+        uses: joao-zanutto/get-selected@v1.1.1
+
+      - run: bun b --only ${{ steps.get-selected-step.outputs.selected }}
+
+      - name: Commit Changes
+        run: |
+          git config --global user.name "Automated Release"
+          git config --global user.email "actions@users.noreply.github.com"
+          git add -A
+          timestamp=$(date -u)
+          git commit -m "Release ${timestamp}" -m "Release for ${{ steps.get-selected-step.outputs.selected }}" || exit 0
+          git push
+
