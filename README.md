@@ -31,7 +31,7 @@ the plugin folder should also contain a `plugin.json` file with the following st
 {
   "name": "Plugin Name",
   "description": "A short description of what the plugin does",
-  "author": "Your Name", // optional
+  "author": "Your Name",
   "version": "0.0.1",
 }
 ```
