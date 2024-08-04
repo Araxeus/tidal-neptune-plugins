@@ -9,12 +9,9 @@ Then just paste the **Install Url** into the plugins page and hit enter.
 
 ## Volume Scroll
 **Install Url: [`https://raw.githubusercontent.com/Araxeus/tidal-neptune-plugins/main/volume-scroll/release/`](https://raw.githubusercontent.com/Araxeus/tidal-neptune-plugins/main/volume-scroll/release/)**  
-Enable scrolling the mousewheel to change the playback volume  
+Enable scrolling the mousewheel on the player to change the playback volume and a setting to change volume "steps"
 
 ## Other Plugin Repositories
 
 - **[Inrixia/neptune-plugins](https://github.com/Inrixia/neptune-plugins)**
 - **[twnlink/neptune-plugins](https://github.com/twnlink/neptune-plugins)**
-
-> [!NOTE]  
-> Near future update will add settings that allows changing the volume "steps" (using `actions.playbackControls.setVolume()`)
