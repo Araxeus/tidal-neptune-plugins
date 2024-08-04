@@ -18,19 +18,16 @@ export const NumberRangeInput = ({
         const newValue = (event.target as HTMLInputElement).value;
         // VALIDATOR
         if (
-            Number.isNaN(newValue) ||
-            parseInt((event.target as HTMLInputElement).value) < 1
+            !Number.isFinite(+newValue) ||
+            parseFloat((event.target as HTMLInputElement).value) < 1
         ) {
             // @ts-expect-error
             event.target.value = '1';
             reactiveValue(1);
-            return;
-        }
-        if (parseInt((event.target as HTMLInputElement).value) > 20) {
+        } else if (parseFloat((event.target as HTMLInputElement).value) > 20) {
             // @ts-expect-error
             event.target.value = '20';
             reactiveValue(20);
-            return;
         }
         onValue?.((event.target as HTMLInputElement).value);
     };
