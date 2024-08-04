@@ -1,13 +1,11 @@
-import { actions, store } from '@neptune';
+import { actions, intercept, store } from '@neptune';
 import { settings } from './settings';
 
-const footerPlayer = document.querySelector<HTMLElement>('#footerPlayer');
-const audioElement = footerPlayer?.querySelector<HTMLElement>(
-    '#footerPlayer>[class^="moreContainer"]>[class^="sliderContainer"]',
-);
-const onWheelElement = footerPlayer;
+type Div = HTMLDivElement | undefined | null;
 
-onWheelElement?.addEventListener('wheel', onWheel);
+let footerPlayer: Div;
+let audioElement: Div;
+let onWheelElement: Div;
 
 // Event.deltaY < 0 means wheel-up (increase), > 0 means wheel-down (decrease)
 function onWheel(e: WheelEvent) {
@@ -41,11 +39,36 @@ function changeVolumePrecise(toIncrease: boolean) {
 function showVolume() {
     audioElement?.dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
     setTimeout(() => {
-        audioElement?.dispatchEvent(new MouseEvent('mouseout', { bubbles: true }));
+        audioElement?.dispatchEvent(
+            new MouseEvent('mouseout', { bubbles: true }),
+        );
     }, 500);
 }
 
+let setupDone = false;
+function setup() {
+    if (setupDone) return;
+    footerPlayer ??= document.querySelector<HTMLDivElement>('#footerPlayer');
+    audioElement ??= footerPlayer?.querySelector<HTMLDivElement>(
+        '#footerPlayer>[class^="moreContainer"]>[class^="sliderContainer"]',
+    );
+    onWheelElement ??= footerPlayer;
+    if (onWheelElement) {
+        onWheelElement.addEventListener('wheel', onWheel);
+        console.log('Set up volume wheel control');
+        setupDone = true;
+    }
+}
+
+const unloadIntercept = intercept(
+    'page/IS_DONE_LOADING',
+    () => void setTimeout(setup, 1000),
+    true,
+);
+setup();
+
 export function onUnload() {
+    unloadIntercept();
     onWheelElement?.removeEventListener('wheel', onWheel);
 }
 export { Settings } from './settings';
