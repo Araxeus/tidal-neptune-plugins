@@ -11,6 +11,8 @@
   },
   "scripts": {
     "b": "bun scripts/build.ts",
+    "check": "bun biome check",
+    "lint": "bun biome check --write",
     "morph": "bun scripts/morph.ts"
   },
   "trustedDependencies": ["@biomejs/biome"]

@@ -4,7 +4,7 @@
   "exclude": ["plugins/*/release/*"],
   "compilerOptions": {
     "paths": {
-      "lib/*": ["./lib/*"],
+      "lib/*": ["./lib/*"]
     },
     "checkJs": true
   }

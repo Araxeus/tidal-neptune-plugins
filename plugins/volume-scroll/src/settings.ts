@@ -1,6 +1,6 @@
 import { html } from '@neptune/voby';
-import { getSettings } from 'lib/storage';
 import { NumberRangeInput } from 'lib/components/number-input';
+import { getSettings } from 'lib/storage';
 
 export const settings = getSettings({
     steps: 10,
@@ -15,4 +15,3 @@ export const Settings = () => html`<div>
 		tooltip="The volume percentage to adjust by"
 	/>
 </div>`;
-

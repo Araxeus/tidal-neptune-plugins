@@ -1,4 +1,4 @@
-import { html, $ } from '@neptune/voby';
+import { $, html } from '@neptune/voby';
 import { DivWithTooltip } from './div-with-tooltip';
 
 type NumberInputProps = {

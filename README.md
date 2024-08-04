@@ -1,14 +1,15 @@
-## My [Tidal Neptune Client](https://github.com/uwu/neptune-installer/releases/latest) Plugins
+# My [Tidal Neptune Client](https://github.com/uwu/neptune-installer/releases/latest) Plugins
 
-To install any of these plugins you need to have the [Tidal Neptune Client](https://github.com/uwu/neptune-installer/releases/latest) installed. 
+To install any of these plugins you need to have the [Tidal Neptune Client](https://github.com/uwu/neptune-installer/releases/latest) installed.
 
 Then just paste the **Install Url** into the plugins page and hit enter.
 ![image](https://github.com/Inrixia/neptune-plugins/assets/6373693/a997156c-a281-46ec-992a-397a742dd146)
 
-# Available Plugins
+## Available Plugins
 
-## Volume Scroll
-**Install Url: [`https://raw.githubusercontent.com/Araxeus/tidal-neptune-plugins/main/volume-scroll/release/`](https://raw.githubusercontent.com/Araxeus/tidal-neptune-plugins/main/volume-scroll/release/)**  
+### Volume Scroll
+
+**Install Url: [`https://raw.githubusercontent.com/Araxeus/tidal-neptune-plugins/main/plugins/volume-scroll/release/`](https://raw.githubusercontent.com/Araxeus/tidal-neptune-plugins/main/plugins/volume-scroll/release/)**  
 Enable scrolling the mousewheel on the player to change the playback volume and a setting to change volume "steps"
 
 ## Other Plugin Repositories
@@ -19,6 +20,7 @@ Enable scrolling the mousewheel on the player to change the playback volume and 
 ----
 
 ## Contributing
+
 If you have a plugin you'd like to add to this list, or you want to add features/fix bugs - feel free to open a pull request.
 
 To install dependencies:

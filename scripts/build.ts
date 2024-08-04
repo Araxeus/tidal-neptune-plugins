@@ -1,12 +1,7 @@
-import { rmdir, readdir } from 'node:fs/promises';
-import { resolve as resolvePath, join as j } from 'node:path';
-//import Bun from 'bun';
+import { readdir, rmdir } from 'node:fs/promises';
+import { join as j, resolve as resolvePath } from 'node:path';
 
 import packageJson from '../package.json';
-
-interface Globalthis {
-    Bun: typeof import('bun');
-}
 
 import prettyMs from 'pretty-ms';
 
@@ -18,7 +13,6 @@ const plugins = (await readdir('./plugins', { withFileTypes: true })).flatMap(
 
 for (const pluginName of plugins) {
     const timeNow = performance.now();
-    console.log(`Building ${pluginName}...`);
     const dir = resolvePath(import.meta.dir, '..', 'plugins', pluginName);
     const destFolder = j(dir, 'release');
     await rmdir(destFolder, { recursive: true });
@@ -31,7 +25,7 @@ for (const pluginName of plugins) {
         //packages: "external",
     });
 
-    console.log(res); // DELETE
+    //console.log(res); // DELETE
 
     if (!res.outputs?.length) {
         console.error(`Error building ${pluginName}`);
@@ -61,7 +55,7 @@ for (const pluginName of plugins) {
     );
 
     console.log(
-        `Successfully built ${pluginName} in ${prettyMs(performance.now() - timeNow)}`,
+        `Built plugin ${pluginName} in ${prettyMs(performance.now() - timeNow)}`,
     );
 }
 
@@ -70,4 +64,8 @@ async function getMD5Hash(filepath: string): Promise<string> {
     const hasher = new Bun.CryptoHasher('md5');
     hasher.update(await file.arrayBuffer());
     return hasher.digest('hex');
+}
+
+interface Globalthis {
+    Bun: typeof import('bun');
 }
