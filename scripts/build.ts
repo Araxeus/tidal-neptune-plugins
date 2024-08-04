@@ -1,15 +1,22 @@
-import { readdir, rmdir } from 'node:fs/promises';
+import { rmdir } from 'node:fs/promises';
 import { join as j, resolve as resolvePath } from 'node:path';
-
+import { getPlugins } from 'lib/common';
 import prettyMs from 'pretty-ms';
 
 import packageJson from '../package.json';
 
-const plugins = (await readdir('./plugins', { withFileTypes: true })).flatMap(
-    (dirent) => (dirent.isDirectory() ? dirent.name : []),
-);
+const plugins = await getPlugins();
+
+const args = process.argv.slice(2);
+const onlySelected = args.includes('--only');
+const selectedPlugins =
+    onlySelected && args.filter((arg) => !arg.startsWith('--'));
 
 for (const pluginName of plugins) {
+    if (onlySelected && !(selectedPlugins as string[]).includes(pluginName)) {
+        console.log(`Skipping ${pluginName}`);
+        continue;
+    }
     const timeNow = performance.now();
     const dir = resolvePath(import.meta.dir, '..', 'plugins', pluginName);
     const destFolder = j(dir, 'release');
