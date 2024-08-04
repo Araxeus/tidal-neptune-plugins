@@ -15,8 +15,10 @@ export const NumberRangeInput = ({
 }: NumberInputProps) => {
     const reactiveValue = $(value);
     const onChange = (event: Event) => {
-        if (reactiveValue() < 1) {
-            reactiveValue(1);
+        if (parseInt((event.target as HTMLInputElement).value) < 1) {
+            // @ts-expect-error
+            event.target.value = '1';
+            return;
         }
         onValue?.((event.target as HTMLInputElement).value);
     };
