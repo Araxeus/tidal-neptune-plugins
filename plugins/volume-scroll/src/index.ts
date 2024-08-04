@@ -3,7 +3,6 @@ import { settings } from './settings';
 
 type Div = HTMLDivElement | undefined | null;
 
-let footerPlayer: Div;
 let audioElement: Div;
 let onWheelElement: Div;
 
@@ -48,11 +47,10 @@ function showVolume() {
 let setupDone = false;
 function setup() {
     if (setupDone) return;
-    footerPlayer ??= document.querySelector<HTMLDivElement>('#footerPlayer');
-    audioElement ??= footerPlayer?.querySelector<HTMLDivElement>(
+    onWheelElement ??= document.querySelector<HTMLDivElement>('#footerPlayer');
+    audioElement ??= onWheelElement?.querySelector<HTMLDivElement>(
         '#footerPlayer>[class^="moreContainer"]>[class^="sliderContainer"]',
     );
-    onWheelElement ??= footerPlayer;
     if (onWheelElement) {
         onWheelElement.addEventListener('wheel', onWheel);
         console.log('Set up volume wheel control');

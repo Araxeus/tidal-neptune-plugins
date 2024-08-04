@@ -32,4 +32,3 @@ jobs:
           timestamp=$(date -u)
           git commit -m "Release ${timestamp}" -m "Release for ${{ steps.get-selected-step.outputs.selected }}" || exit 0
           git push
-

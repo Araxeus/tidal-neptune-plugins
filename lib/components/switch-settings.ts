@@ -1,4 +1,4 @@
-import { $, html } from '@neptune/voby';
+import { html } from '@neptune/voby';
 import { DivWithTooltip } from './div-with-tooltip';
 
 type SwitchSettingProps = {
@@ -15,10 +15,10 @@ export const SwitchSetting = ({
 }: SwitchSettingProps) => {
     checked ??= false;
     return html`
-		<${DivWithTooltip} tooltip=${tooltip}>
-			<label for="switch-${title}" style="font-size: 1.2em;margin-bottom: 5px;">${title}</label>
-			<input id="switch-${title}" class="neptune-switch-checkbox" type="checkbox" checked=${checked} />
-			<span onClick=${onClick} class="neptune-switch" />
-		<//>
+    <${DivWithTooltip} tooltip=${tooltip}>
+        <label for="switch-${title}" style="font-size: 1.2em;margin-bottom: 5px;">${title}</label>
+        <input id="switch-${title}" class="neptune-switch-checkbox" type="checkbox" checked=${checked} />
+        <span onClick=${onClick} class="neptune-switch">
+    <//>
 	`;
 };
