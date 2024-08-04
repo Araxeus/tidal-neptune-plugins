@@ -12,14 +12,14 @@ function onWheel(e: WheelEvent) {
     if (!e.deltaY) return;
     e.preventDefault();
     const toIncrease = e.deltaY < 0;
-    if (settings.precise) {
-        changeVolumePrecise(toIncrease);
+    if (settings.steps === 10) {
+        changeVolumeBy10(toIncrease);
     } else {
-        changeVolume(toIncrease);
+        changeVolumePrecise(toIncrease);
     }
 }
 
-function changeVolume(toIncrease: boolean) {
+function changeVolumeBy10(toIncrease: boolean) {
     toIncrease
         ? actions.playbackControls.increaseVolume()
         : actions.playbackControls.decreaseVolume();
@@ -29,8 +29,8 @@ function changeVolumePrecise(toIncrease: boolean) {
     const currentVolume = store.getState().playbackControls.volume;
     const volume = Math.round(
         toIncrease
-            ? Math.min(currentVolume + 1, 100)
-            : Math.max(currentVolume - 1, 0),
+            ? Math.min(currentVolume + settings.steps, 100)
+            : Math.max(currentVolume - settings.steps, 0),
     );
     actions.playbackControls.setVolume({ volume });
 }

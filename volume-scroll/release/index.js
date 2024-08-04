@@ -1,11 +1,16 @@
-import{actions as s,store as $}from"@neptune";import{html as b}from"@neptune/voby";import{html as x}from"@neptune/voby";import{html as f}from"@neptune/voby";var g=({children:t,tooltip:o})=>f`
+import{actions as p,store as T}from"@neptune";import{html as f}from"@neptune/voby";import{storage as i}from"@plugin";var g=(t)=>{i.settings??={};for(let o of Object.keys(t))i.settings[o]??=t[o];return i.settings};import{html as $,$ as b}from"@neptune/voby";import{html as v}from"@neptune/voby";var m=({children:t,tooltip:o})=>v`
 	<div style="margin-bottom: 15px;display: flex;justify-content: space-between;align-items: center;" title="${o}">${t}</div>
-`;var n=({checked:t,onClick:o,title:i,tooltip:c})=>{return t??=!1,x`
-		<${g} tooltip=${c}>
-			<label for="switch-${i}" style="font-size: 1.2em;margin-bottom: 5px;">${i}</label>
-			<input id="switch-${i}" class="neptune-switch-checkbox" type="checkbox" checked=${t} />
-			<span onClick=${o} class="neptune-switch" />
+`;var l=({value:t,onValue:o,title:r,tooltip:a})=>{const n=b(t),s=(u)=>o?.(u.target.value);return $`
+		<${m} tooltip=${a}>
+			<label for="text-${r}" style="font-size: 1.2em;margin-right: 16px;">${r}</label>
+			<input type="number" min="1" max="20" id="text-${r}" value=${n} onChange=${s} style="flex-grow: 1;" />
+            <input type="range" min="1" max="20" id="range-${r}" value=${n} onChange=${s} style="flex-grow: 1;" />
 		<//>
-	`};import{storage as r}from"@plugin";var y=(t)=>{r.settings??={};for(let o of Object.keys(t))r.settings[o]??=t[o];return r.settings};var p=y({precise:!1}),k=()=>b`<div>
-	<${n} checked=${p.precise} onClick=${()=>{p.precise=!p.precise}} title="Precise volume adjustments" />
-</div>`;function T(t){if(!t.deltaY)return;t.preventDefault();const o=t.deltaY<0;if(p.precise)l(o);else h(o)}function h(t){t?s.playbackControls.increaseVolume():s.playbackControls.decreaseVolume()}function l(t){const o=$.getState().playbackControls.volume,i=Math.round(t?Math.min(o+1,100):Math.max(o-1,0));s.playbackControls.setVolume({volume:i})}function R(){S?.removeEventListener("wheel",T)}var S=document.querySelector('#footerPlayer>[class^="moreContainer"]>[class^="sliderContainer"]');S?.addEventListener("wheel",T);export{R as onUnload,k as Settings};
+	`};var e=g({steps:10}),S=()=>f`<div>
+    	<${l}
+		value=${e.steps}
+		onValue=${(t)=>{e.steps=parseInt(t)}}
+		title="Volume Steps"
+		tooltip="The volume percentage to adjust by"
+	/>
+</div>`;function y(t){if(!t.deltaY)return;t.preventDefault();const o=t.deltaY<0;if(e.steps===10)h(o);else d(o)}function h(t){t?p.playbackControls.increaseVolume():p.playbackControls.decreaseVolume()}function d(t){const o=T.getState().playbackControls.volume,r=Math.round(t?Math.min(o+e.steps,100):Math.max(o-e.steps,0));p.playbackControls.setVolume({volume:r})}function J(){x?.removeEventListener("wheel",y)}var x=document.querySelector('#footerPlayer>[class^="moreContainer"]>[class^="sliderContainer"]');x?.addEventListener("wheel",y);export{J as onUnload,S as Settings};

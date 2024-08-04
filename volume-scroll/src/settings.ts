@@ -1,13 +1,18 @@
 import { html } from '@neptune/voby';
-import { SwitchSetting } from '../lib/components/switch-settings';
 import { getSettings } from '../lib/storage';
+import { NumberRangeInput } from '../lib/components/number-input';
 
 export const settings = getSettings({
-    precise: false as boolean,
+    steps: 10,
 });
-
 export const Settings = () => html`<div>
-	<${SwitchSetting} checked=${settings.precise} onClick=${() => {
-        settings.precise = !settings.precise;
-    }} title="Precise volume adjustments" />
+    	<${NumberRangeInput}
+		value=${settings.steps}
+		onValue=${(text: string) => {
+            settings.steps = parseInt(text);
+        }}
+		title="Volume Steps"
+		tooltip="The volume percentage to adjust by"
+	/>
 </div>`;
+
