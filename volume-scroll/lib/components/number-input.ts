@@ -17,11 +17,19 @@ export const NumberRangeInput = ({
     const onChange = (event: Event) =>
         onValue?.((event.target as HTMLInputElement).value);
 
+    const onWheel = (event: WheelEvent) => {
+        event.preventDefault();
+        const step = event.deltaY < 0 ? 1 : -1;
+        const newValue = Math.min(20, Math.max(1, reactiveValue() + step));
+        reactiveValue(newValue);
+        onValue?.(newValue.toString());
+    };
+
     return html`
 		<${DivWithTooltip} tooltip=${tooltip}>
 			<label for="text-${title}" style="font-size: 1.2em;margin-right: 16px;">${title}</label>
-			<input type="number" min="1" max="20" id="text-${title}" value=${reactiveValue} onChange=${onChange} style="flex-grow: 1;" />
-            <input type="range" min="1" max="20" id="range-${title}" value=${reactiveValue} onChange=${onChange} style="flex-grow: 1;" />
+			<input type="number" min="1" max="20" id="text-${title}" value=${reactiveValue} onChange=${onChange} onwheel=${onWheel} style="flex-grow: 1; max-width: 35px; margin-right: 8px;" />
+            <input type="range" min="1" max="20" id="range-${title}" value=${reactiveValue} onChange=${onChange} onwheel=${onWheel} style="flex-grow: 1;" />
 		<//>
 	`;
 };
