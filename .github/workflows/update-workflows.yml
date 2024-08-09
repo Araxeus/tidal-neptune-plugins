@@ -1,16 +1,15 @@
 name: Update Workflows
-
 on:
   push:
     branches:
       - main
     paths:
-      - 'plugins/*'
-
+      - 'plugins/**'
+permissions:
+  contents: write
 jobs:
   check-plugin-changes:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
         with:
@@ -27,7 +26,6 @@ jobs:
         run: exit 0
 
       - run: bun install
-
       - run: bun scripts/update-actions.ts
 
       - name: Commit Changes
