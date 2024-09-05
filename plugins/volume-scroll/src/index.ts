@@ -57,8 +57,10 @@ function setup() {
         setupDone = true;
     }
 }
-
-const unloadIntercept = intercept('playbackControls/SET_VOLUME', setup, true);
+// session/TOGGLE_SHOW_DESKTOP_RELEASE_NOTES
+// eventTracking/DISPLAY_PAGE
+// page/IS_DONE_LOADING
+const unloadIntercept = intercept('favorites/SET_FAVORITE_IDS', setup, true);
 setup();
 
 export function onUnload() {
